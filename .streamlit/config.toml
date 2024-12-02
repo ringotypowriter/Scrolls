@@ -1,0 +1,12 @@
+[client]
+showSidebarNavigation = false
+toolbarMode = "minimal"
+
+[server]
+headless = true
+maxUploadSize = 2048
+port = 8501
+address = "localhost"
+
+[theme]
+primaryColor = "#EB7A77"

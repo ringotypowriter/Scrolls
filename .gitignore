@@ -1,0 +1,11 @@
+__pycache__/
+.cache/
+.idea
+output_segments/
+output/*
+output_segments_with_timestamps/
+venv/
+temp/
+
+# General
+.DS_Store
