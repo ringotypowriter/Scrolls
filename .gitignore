@@ -9,3 +9,6 @@ temp/
 
 # General
 .DS_Store
+
+example_video.mp4
+platform/darwin/ollama-darwin
