@@ -47,7 +47,7 @@ def extract_audio_from_video(video_path: str, temp_audio_filename: Optional[str]
     try:
         # 构建 FFmpeg 命令
         command = [
-            "ffmpeg",
+            r"ffmpeg",
             "-i", video_path,   # 输入文件
             "-vn",              # 不处理视频流
             "-acodec", "libmp3lame",  # 使用 MP3 编码器
@@ -59,14 +59,15 @@ def extract_audio_from_video(video_path: str, temp_audio_filename: Optional[str]
         # 调用 FFmpeg 并捕获输出
         process = subprocess.run(
             command,
-            stdout=subprocess.PIPE,  # 捕获标准输出
-            stderr=subprocess.PIPE,  # 捕获错误输出
-            text=True                # 将输出解码为文本
+            shell=False,
+            capture_output=True
         )
+
 
         # 检查是否执行成功
         if process.returncode == 0:
             print(f"音频提取成功！保存为: {temp_audio_filename}")
+            return temp_audio_filename
         else:
             print(f"FFmpeg 执行失败！错误信息:\n{process.stderr}")
 
@@ -74,7 +75,7 @@ def extract_audio_from_video(video_path: str, temp_audio_filename: Optional[str]
         print(f"发生异常: {e}")
 
 
-    return temp_audio_filename
+
 
 
 # Function to transcribe the extracted audio using Whisper model
@@ -83,9 +84,9 @@ def transcribe_audio_with_whisper(audio_path: str, need_timestamp : bool = False
 
     srt_content = []
     global_segment_index = 1
-    audio_files = segement.split_audio_smart_with_timestamps(audio_path,"./temp/segments_" + os.path.basename(audio_path).replace(".","_"))
+    audio_files = segement.split_audio_smart_with_timestamps(audio_path, os.path.join("temp", "segments_" + os.path.basename(audio_path).replace(".","_")))
 
-    model = whisper.load_model("medium", download_root="./.cache/whisper")
+    model = whisper.load_model("large", download_root=os.path.join(".",".cache","whisper"))
 
     # Transcribe the audio file, supporting multi-language transcription
     # result = model.transcribe(audio_path, language=language, fp16=False, word_timestamps=need_timestamp)
@@ -95,8 +96,8 @@ def transcribe_audio_with_whisper(audio_path: str, need_timestamp : bool = False
         if "@" in file_name:
             time_range = file_name.split("_")[-1].replace(".mp3", "")
             start_time, end_time = time_range.split("@")
-            start_offset = int(start_time.split(":")[0]) * 3600 + int(start_time.split(":")[1]) * 60 + int(
-                start_time.split(":")[2])
+            start_offset = int(start_time.split("$")[0]) * 3600 + int(start_time.split("$")[1]) * 60 + int(
+                start_time.split("$")[2])
         else:
             start_time, end_time, start_offset = "Unknown", "Unknown", 0
 
@@ -192,7 +193,7 @@ if __name__ == "__main__":
     # Example file paths
     video_path = 'example_video.mp4'  # Path to the video file
     output_txt_path = 'transcription_output.txt'  # Output path for transcription text file
-    output_srt_path = 'temp/output.srt'  # Output path for SRT subtitle file
+    output_srt_path = os.path.join("temp","output.srt")  # Output path for SRT subtitle file
 
     start_time = time.time()
 

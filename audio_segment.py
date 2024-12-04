@@ -55,8 +55,8 @@ def split_audio_smart_with_timestamps(input_file, output_dir, min_silence_len=10
         segment = audio[start:end]
         start_time = ms_to_timestamp(start)
         end_time = ms_to_timestamp(end)
-        output_file = os.path.join(output_dir, f"segment_{i + 1}_{start_time}@{end_time}.mp3")
-        segment.export(output_file, format="mp3")
+        output_file = os.path.join(output_dir, f"segment_{i + 1}_{start_time}@{end_time}.mp3".replace(":","$"))
+        segment.export(os.path.join(os.getcwd(), output_file), format="mp3")
         print(f"已导出: {output_file} (时长: {len(segment) / 1000} 秒)")
         output_files.append(output_file)
 
@@ -65,6 +65,6 @@ def split_audio_smart_with_timestamps(input_file, output_dir, min_silence_len=10
 
 if __name__ == "__main__":
     # 示例调用
-    input_audio = "temp/temp_audio_example_video_mp4_exported.mp3"  # 替换为你的音频文件路径
+    input_audio = "temp\\extracted_audio.mp3"  # 替换为你的音频文件路径
     output_directory = "output_segments_with_timestamps"  # 替换为你的输出目录
     split_audio_smart_with_timestamps(input_audio, output_directory)

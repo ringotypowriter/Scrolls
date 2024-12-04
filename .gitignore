@@ -12,4 +12,5 @@ temp/
 
 example_video.mp4
 platform/darwin/ollama-darwin
+platform/windows/
 temp/output.srt
