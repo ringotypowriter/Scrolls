@@ -76,7 +76,7 @@ streamlit run app.py
 
 * UI: Streamlit
   * 协议: Apache-2.0 license 
-  * 链接:https://github.com/streamlit/streamlit
+  * 链接: https://github.com/streamlit/streamlit
 
 * 音频转文本模型：OpenAI Whisper Medium
   *	参数量: 769M
