@@ -74,14 +74,18 @@ streamlit run app.py
 
 🧠 使用的模型与技术
 
+* UI: Streamlit
+  * 协议: Apache-2.0 license 
+  * 链接:https://github.com/streamlit/streamlit
+
 * 音频转文本模型：OpenAI Whisper Medium
   *	参数量: 769M
   *	协议: MIT License
   * 链接: https://github.com/openai/whisper
 	
-* 文本处理模型：Meta LLaMA 3.1 
-  * 数量: 8B
-  * 协议: LLAMA 2 COMMUNITY LICENSE AGREEMENT
+* 文本处理模型：Meta LLaMA 3.2 
+  * 参数量: 11B
+  * 协议: LLAMA 3 COMMUNITY LICENSE AGREEMENT
   * 链接: https://github.com/meta-llama/llama
 
 * Ollama

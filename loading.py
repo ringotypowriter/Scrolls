@@ -23,7 +23,7 @@ def check_ollama_status():
     st.info(f"端侧大模型欢迎消息: {response['message'].content}")
 
 
-MODEL_NAME="llama3.1:8b"
+MODEL_NAME="llama3.2-vision:11b"
 
 
 def handle_exit_event():
