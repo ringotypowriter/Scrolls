@@ -22,11 +22,11 @@ Scrolls 的开发者 RingoTypewriter 专注于开发帮助学生提高学习效�
 
 ## 🚀 安装与运行
 
-环境要求
+### 环境要求
 * Python: 3.9.13 (为了能够正确运行Whisper）
 * 依赖项: 项目需要的依赖列在 requirements.txt 中
 
-安装步骤
+### 安装步骤
 
 > 注意:
 > 需要手动将 **ollama-cli** 的可执行文件放置到 `platform` 文件夹中。
@@ -59,7 +59,7 @@ streamlit run app.py
 
 ---
 
-⚙️ 功能模块
+## ⚙️ 功能模块
 
 * 音频处理：
   * 加载各种格式的音频文件。
@@ -72,7 +72,7 @@ streamlit run app.py
 
 ---
 
-🧠 使用的模型与技术
+## 🧠 使用的模型与技术
 
 * UI: Streamlit
   * 协议: Apache-2.0 license 
@@ -98,7 +98,7 @@ streamlit run app.py
 
 ---
 
-🧑‍💻 贡献指南
+## 🧑‍💻 贡献指南
 
 欢迎社区贡献！您可以通过以下方式参与：
 1.	提交 Issue 或功能建议。
@@ -107,7 +107,7 @@ streamlit run app.py
 
 ---
 
-📄 许可证
+## 📄 许可证
 
 > Scrolls 使用 MIT 许可证，允许自由使用、修改和分发。
 
