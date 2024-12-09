@@ -1,5 +1,7 @@
 import os
 import subprocess
+import time
+
 import whisper
 from zhconv import convert
 from typing import Optional
@@ -96,6 +98,7 @@ def convert_videos_to_srt(input_folder, output_audio_folder, output_srt_folder):
         os.makedirs(output_srt_folder)
 
     for file_name in os.listdir(input_folder):
+        start_time = time.time()
         file_path = os.path.join(input_folder, file_name)
         if not os.path.isfile(file_path):
             continue
@@ -119,7 +122,9 @@ def convert_videos_to_srt(input_folder, output_audio_folder, output_srt_folder):
             output_audio_path = os.path.join(output_audio_folder, f"{file_base}.mp3")
             extract_audio_from_video(file_path, output_audio_path)
             process_audio(output_audio_path, srt_path, txt_path)
-            print(f"处理完成：{file_name}")
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            print(f"处理完成：{file_name} | 耗时 {elapsed_time:.6f} 秒")
         else:
             print(f"跳过不支持的文件类型：{file_name}")
 
