@@ -14,3 +14,8 @@ example_video.mp4
 platform/darwin/ollama-darwin
 platform/windows/
 temp/output.srt
+
+# Work folders
+input_videos/
+output_audios/
+output_texts/
