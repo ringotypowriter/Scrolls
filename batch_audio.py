@@ -46,7 +46,7 @@ def process_audio(audio_path, srt_path, txt_path):
        """
     try:
         # 加载 Whisper 模型
-        model = whisper.load_model("large", download_root=os.path.join(".", ".cache", "whisper"))
+        model = whisper.load_model("large", download_root=os.path.join(".cache", "whisper"))
 
         # 转录音频
         result = model.transcribe(audio_path,
