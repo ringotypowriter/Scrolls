@@ -1,7 +1,8 @@
 import os
+import platform
 import subprocess
 import time
-
+import torch
 import whisper
 from zhconv import convert
 from typing import Optional
@@ -46,7 +47,12 @@ def process_audio(audio_path, srt_path, txt_path):
        """
     try:
         # 加载 Whisper 模型
-        model = whisper.load_model("large", download_root=os.path.join(".cache", "whisper"))
+        system_platform = platform.system().lower()
+        if system_platform == "windows" :
+            torch.cuda.init()
+            model = whisper.load_model("large", download_root=os.path.join(".cache", "whisper"), device="cuda:1")
+        else :
+            model = whisper.load_model("large", download_root=os.path.join(".cache", "whisper"))
 
         # 转录音频
         result = model.transcribe(audio_path,
@@ -69,7 +75,7 @@ def process_audio(audio_path, srt_path, txt_path):
             for i, segment in enumerate(segments):
                 start = format_timestamp(segment['start'])
                 end = format_timestamp(segment['end'])
-                text = convert(segment['text'].strip(),"zh-hans")
+                text = convert(segment['text'].strip(), "zh-hans")
 
                 srt_file.write(f"{i + 1}\n")
                 srt_file.write(f"{start} --> {end}\n")
@@ -118,7 +124,7 @@ def convert_videos_to_srt(input_folder, output_audio_folder, output_srt_folder):
             print(f"处理完成：{file_name}")
 
         # 如果是mp4文件，先提取音频再处理
-        elif file_ext.lower() == '.mp4':
+        elif file_ext.lower() == '.mp4' or file_ext.lower() == '.mkv':
             output_audio_path = os.path.join(output_audio_folder, f"{file_base}.mp3")
             extract_audio_from_video(file_path, output_audio_path)
             process_audio(output_audio_path, srt_path, txt_path)
